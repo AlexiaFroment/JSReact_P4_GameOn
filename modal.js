@@ -40,7 +40,7 @@ const regexName = /^[^0-9]+$/;
 const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
 // Calculate age => function isAdult
-const today = new Date();
+// const today = new Date();
 const birthday = document.getElementById("birthdate");
 
 // Error message
@@ -77,7 +77,7 @@ function closeModal() {
 
 // Check firstName input => See refactor in method 🔴
 firstName.addEventListener("input", firstNameValidation);
-// firstName.addEventListener("blur", userValidation);
+firstName.addEventListener("blur", userValidation);
 
 function firstNameValidation() {
   if (
@@ -95,7 +95,7 @@ function firstNameValidation() {
 
 // Check name input => See refactor in method 🔴
 name.addEventListener("input", nameValidation);
-// name.addEventListener("blur", userValidation);
+name.addEventListener("blur", userValidation);
 
 function nameValidation() {
   if (
@@ -113,7 +113,7 @@ function nameValidation() {
 
 // Check email input 👍
 email.addEventListener("input", emailValidation);
-// email.addEventListener("blur", emailValidation);
+email.addEventListener("blur", emailValidation);
 
 function emailValidation() {
   if (regexEmail.test(email.value)) {
@@ -129,7 +129,9 @@ function emailValidation() {
 birthDate.addEventListener("input", isAdult);
 
 function isAdult() {
+  const today = new Date();
   const birthdayFormatDate = new Date(birthday.value);
+
   if (
     yearsBetweenDates(today, birthdayFormatDate) >= 18 &&
     yearsBetweenDates(today, birthdayFormatDate) <= 100
@@ -152,7 +154,7 @@ function yearsBetweenDates(day1, day2) {
 
 // check competition
 competition.addEventListener("input", isNoCompleted);
-// competition.addEventListener("blur", isNoCompleted);
+competition.addEventListener("blur", isNoCompleted);
 function isNoCompleted() {
   // I'd like to check if !competition.value.length===0, for the moment it'doesn't work 😡
   if (competition.value >= 0 && competition.value <= 99) {
