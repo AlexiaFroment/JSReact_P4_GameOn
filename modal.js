@@ -70,6 +70,7 @@ function launchModal() {
 
 function closeModal() {
   modalBgForm.style.display = "none";
+  location.reload();
 }
 
 // Check all inputs form modal
@@ -129,7 +130,10 @@ birthDate.addEventListener("input", isAdult);
 
 function isAdult() {
   const birthdayFormatDate = new Date(birthday.value);
-  if (yearsBetweenDates(today, birthdayFormatDate) >= 18) {
+  if (
+    yearsBetweenDates(today, birthdayFormatDate) >= 18 &&
+    yearsBetweenDates(today, birthdayFormatDate) <= 100
+  ) {
     validationInput({ index: 3, validation: true });
     inputsValidity.birthdate = true;
   } else {
@@ -140,7 +144,7 @@ function isAdult() {
 
 function yearsBetweenDates(day1, day2) {
   const duration = Math.round(
-    (day1.getTime() - day2.getTime()) / (1000 * 3600 * 24 * 365)
+    Math.abs(day1.getTime() - day2.getTime()) / (1000 * 3600 * 24 * 365)
   );
   // console.log(duration);
   return duration;
@@ -193,9 +197,6 @@ function handleClickCheck1() {
 
 // ❓ Refactor firstNameValidation et nameValidation => don't work
 function userValidation({ inputName, index }) {
-  console.log("InputName : ", inputName);
-  console.log("Index : ", index);
-  console.log("InputName : ", inputName.value);
   if (
     inputName.value.length >= 2 &&
     inputName.value.length < 20 &&
@@ -228,9 +229,6 @@ let isAnimating = false;
 form.addEventListener("submit", function (event) {
   event.preventDefault();
 
-  // function validate(e) {
-  // e.preventDefault();
-  // console.log(location);
   const keys = Object.keys(inputsValidity);
   const failedInputs = keys.filter((key) => !inputsValidity[key]);
 
@@ -252,20 +250,15 @@ form.addEventListener("submit", function (event) {
     question.remove();
     btnSubmit.remove();
 
-    // Doesn'work =>  The location variable is undefined / btn style is strange / the height of the form needs to be reviewed 🔴
-
+    // Create element for replace the content form
     const p = document.createElement("p");
-    // const loc = document.querySelector('input[name="location"]');
-    // console.log(loc);
-    p.innerHTML = `Merci pour votre inscription au tournoi`;
-    // p.classList.add("modal-confirmed-text");
+    p.innerText = `Merci pour \n votre inscription`;
+    p.classList.add("modal-confirmed-text");
     form.appendChild(p);
 
-    // btnToggle.replace("C'est parti", "Fermer");
-
     const btn = document.createElement("btn");
-    btn.innerHTML = `Fermer`;
-    btn.classList.add("btn-submit");
+    btn.innerText = `Fermer`;
+    btn.classList.add("btn-submit2");
     form.appendChild(btn);
 
     btn.addEventListener("click", closeModal);
