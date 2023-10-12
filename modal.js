@@ -7,13 +7,17 @@ function editNav() {
   }
 }
 
-// Add isActive on the links of the navbar
-const links = document.querySelectorAll(".main-navbar > a");
-console.log(links);
-links.forEach((link) => link.addEventListener("click", isActive));
-function isActive() {
-  links.classList.add("active");
-}
+// NavBar toggle
+const btn = document.querySelector(".icon");
+const icon = document.querySelector(".icon i");
+const dropdownMenu = document.querySelector(".dropdown-menu");
+
+btn.addEventListener("click", function () {
+  dropdownMenu.classList.toggle("open");
+  const isOpen = dropdownMenu.classList.contains("open");
+
+  icon.classList = isOpen ? "fa-solid fa-xmark" : "fa-solid fa-bars";
+});
 
 // DOM Elements
 
@@ -77,7 +81,7 @@ function closeModal() {
 
 // Check firstName input => See refactor in method 🔴
 firstName.addEventListener("input", firstNameValidation);
-firstName.addEventListener("blur", userValidation);
+firstName.addEventListener("blur", firstNameValidation);
 
 function firstNameValidation() {
   if (
@@ -95,7 +99,7 @@ function firstNameValidation() {
 
 // Check name input => See refactor in method 🔴
 name.addEventListener("input", nameValidation);
-name.addEventListener("blur", userValidation);
+name.addEventListener("blur", nameValidation);
 
 function nameValidation() {
   if (
@@ -156,7 +160,6 @@ function yearsBetweenDates(day1, day2) {
 competition.addEventListener("input", isNoCompleted);
 competition.addEventListener("blur", isNoCompleted);
 function isNoCompleted() {
-  // I'd like to check if !competition.value.length===0, for the moment it'doesn't work 😡
   if (competition.value >= 0 && competition.value <= 99) {
     validationInput({ index: 4, validation: true });
     inputsValidity.competition = true;
@@ -178,8 +181,6 @@ function handleClickCheck(e) {
     validationInput({ index: 5, validation: false });
     inputsValidity.checkbox = false;
   }
-  // console.log(location);
-  // return location;
 }
 
 // Check legalNotice
@@ -198,19 +199,19 @@ function handleClickCheck1() {
 // **********************************************************************************
 
 // ❓ Refactor firstNameValidation et nameValidation => don't work
-function userValidation({ inputName, index }) {
-  if (
-    inputName.value.length >= 2 &&
-    inputName.value.length < 20 &&
-    regexName.test(inputName.value)
-  ) {
-    validationInput({ index: index, validation: true });
-    inputsValidity = true;
-  } else {
-    validationInput({ index: index, validation: false });
-    inputsValidity = false;
-  }
-}
+// function userValidation({ inputName, index }) {
+//   if (
+//     inputName.value.length >= 2 &&
+//     inputName.value.length < 20 &&
+//     regexName.test(inputName.value)
+//   ) {
+//     validationInput({ index: index, validation: true });
+//     inputsValidity = true;
+//   } else {
+//     validationInput({ index: index, validation: false });
+//     inputsValidity = false;
+//   }
+// }
 
 // Methods for validating each input and used on each input function
 function validationInput({ index, validation }) {
@@ -222,8 +223,6 @@ function validationInput({ index, validation }) {
     errorMsg[index].setAttribute("data-error-visible", "true");
   }
 }
-
-// Send form => replace content form by "Inscription validée"
 
 // form.addEventListener("submit", validate);
 let isAnimating = false;
