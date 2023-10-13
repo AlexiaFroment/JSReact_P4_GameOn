@@ -260,15 +260,6 @@ input[data-error]::after {
   font-weight: normal;
 }
 
-.checkbox2-label:nth-child(1) {
-  padding-bottom: 0;
-  margin-bottom: 0;
-}
-
-.checkbox2-label:nth-child(2) {
-  padding-bottom: 30px;
-}
-
 .checkbox-label .checkbox-icon,
 .checkbox2-label .checkbox-icon {
   display: block;
