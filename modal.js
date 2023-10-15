@@ -1,19 +1,4 @@
-function editNav() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
-
 // SELECT ITEMS*****************************************************
-// Btn => Je m'inscris
-const modalBtn = document.querySelectorAll(".modal-btn");
-// Form modal - bg - closeBtn
-const modalBgForm = document.querySelector(".bground");
-const form = document.querySelector("form");
-const closeBtn = document.querySelector(".close");
 // Inputs form modal
 const firstName = document.querySelector("#first");
 const name = document.querySelector("#last");
@@ -34,10 +19,19 @@ const birthday = document.getElementById("birthdate");
 
 // Error message
 const errorInput = document.querySelectorAll(".text-control");
+console.log(errorInput);
 const errorMsg = document.querySelectorAll(".formData");
+console.log(errorMsg);
 const question = document.querySelector(".text-label");
 
 // DISPLAY *******************************************************
+// Btn => Je m'inscris
+const modalBtn = document.querySelectorAll(".modal-btn");
+
+// Form modal - bg - closeBtn
+const form = document.querySelector("form");
+const modalBgForm = document.querySelector(".bground");
+const closeBtn = document.querySelector(".close");
 
 // NavBar toggle
 const btn = document.querySelector(".icon");
