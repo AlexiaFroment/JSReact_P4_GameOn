@@ -7,20 +7,7 @@ function editNav() {
   }
 }
 
-// NavBar toggle
-const btn = document.querySelector(".icon");
-const icon = document.querySelector(".icon i");
-const dropdownMenu = document.querySelector(".dropdown-menu");
-
-btn.addEventListener("click", function () {
-  dropdownMenu.classList.toggle("open");
-  const isOpen = dropdownMenu.classList.contains("open");
-
-  icon.classList = isOpen ? "fa-solid fa-xmark" : "fa-solid fa-bars";
-});
-
-// DOM Elements
-
+// SELECT ITEMS*****************************************************
 // Btn => Je m'inscris
 const modalBtn = document.querySelectorAll(".modal-btn");
 // Form modal - bg - closeBtn
@@ -34,7 +21,6 @@ const email = document.querySelector("#email");
 const birthDate = document.querySelector("#birthdate");
 const competition = document.querySelector("#quantity");
 const checkbox = document.querySelectorAll('input[type="radio"]');
-// let location = "";
 const legalNotice = document.querySelector("#checkbox1");
 const btnSubmit = document.querySelector(".btn-submit");
 const btnToggle = document.querySelector(".toggle-modal");
@@ -44,27 +30,28 @@ const regexName = /^[^0-9]+$/;
 const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
 // Calculate age => function isAdult
-// const today = new Date();
 const birthday = document.getElementById("birthdate");
 
 // Error message
 const errorInput = document.querySelectorAll(".text-control");
 const errorMsg = document.querySelectorAll(".formData");
 const question = document.querySelector(".text-label");
-console.log(question);
 
-// Check all inputs are complete
-const inputsValidity = {
-  firstname: false,
-  name: false,
-  email: false,
-  birthdate: false,
-  competition: false,
-  checkbox: false,
-  legalNotice: true,
-};
+// DISPLAY *******************************************************
 
-// Display & close form modal
+// NavBar toggle
+const btn = document.querySelector(".icon");
+const icon = document.querySelector(".icon i");
+const dropdownMenu = document.querySelector(".dropdown-menu");
+
+btn.addEventListener("click", function () {
+  dropdownMenu.classList.toggle("open");
+  const isOpen = dropdownMenu.classList.contains("open");
+
+  icon.classList = isOpen ? "fa-solid fa-xmark" : "fa-solid fa-bars";
+});
+
+// Open & close  modal
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 closeBtn.addEventListener("click", closeModal);
 
@@ -77,9 +64,9 @@ function closeModal() {
   location.reload();
 }
 
-// Check all inputs form modal
+// CHECK EACH MODAL INPUT INDIVIDUALLY**********************************
 
-// Check firstName input => See refactor in method 🔴
+// ✅ Check firstName
 firstName.addEventListener("input", firstNameValidation);
 firstName.addEventListener("blur", firstNameValidation);
 
@@ -97,7 +84,7 @@ function firstNameValidation() {
   }
 }
 
-// Check name input => See refactor in method 🔴
+// ✅ Check name input
 name.addEventListener("input", nameValidation);
 name.addEventListener("blur", nameValidation);
 
@@ -115,7 +102,7 @@ function nameValidation() {
   }
 }
 
-// Check email input 👍
+// ✅ Check email input
 email.addEventListener("input", emailValidation);
 email.addEventListener("blur", emailValidation);
 
@@ -129,8 +116,9 @@ function emailValidation() {
   }
 }
 
-// Check dateOfBirth
+// ✅ Check dateOfBirth
 birthDate.addEventListener("input", isAdult);
+birthDate.addEventListener("blur", isAdult);
 
 function isAdult() {
   const today = new Date();
@@ -152,13 +140,11 @@ function yearsBetweenDates(day1, day2) {
   const duration = Math.round(
     Math.abs(day1.getTime() - day2.getTime()) / (1000 * 3600 * 24 * 365)
   );
-  // console.log(duration);
   return duration;
 }
 
-// check competition
+// ✅ check competition
 competition.addEventListener("input", isNoCompleted);
-competition.addEventListener("blur", isNoCompleted);
 function isNoCompleted() {
   if (competition.value >= 0 && competition.value <= 99) {
     validationInput({ index: 4, validation: true });
@@ -169,7 +155,7 @@ function isNoCompleted() {
   }
 }
 
-// Check checkboxes => 🔴 Return location doesn't work
+// ✅ Check checkboxes
 checkbox.forEach((check) => check.addEventListener("click", handleClickCheck));
 
 function handleClickCheck(e) {
@@ -183,7 +169,7 @@ function handleClickCheck(e) {
   }
 }
 
-// Check legalNotice
+// ✅ Check legalNotice
 legalNotice.addEventListener("click", handleClickCheck1);
 
 function handleClickCheck1() {
@@ -196,24 +182,7 @@ function handleClickCheck1() {
   }
 }
 
-// **********************************************************************************
-
-// ❓ Refactor firstNameValidation et nameValidation => don't work
-// function userValidation({ inputName, index }) {
-//   if (
-//     inputName.value.length >= 2 &&
-//     inputName.value.length < 20 &&
-//     regexName.test(inputName.value)
-//   ) {
-//     validationInput({ index: index, validation: true });
-//     inputsValidity = true;
-//   } else {
-//     validationInput({ index: index, validation: false });
-//     inputsValidity = false;
-//   }
-// }
-
-// Methods for validating each input and used on each input function
+// ▶️ Methods for validating each input and used on each input function
 function validationInput({ index, validation }) {
   if (validation) {
     errorInput[index].setAttribute("data-error-visible", "false");
@@ -224,7 +193,20 @@ function validationInput({ index, validation }) {
   }
 }
 
-// form.addEventListener("submit", validate);
+// CHECK ALL INPUTS BEFORE TO SEND
+
+// When I click on "Let's Go", check that each modal input is complete
+// Create an object to check ...
+const inputsValidity = {
+  firstname: false,
+  name: false,
+  email: false,
+  birthdate: false,
+  competition: false,
+  checkbox: false,
+  legalNotice: true,
+};
+
 let isAnimating = false;
 
 form.addEventListener("submit", function (event) {
@@ -233,6 +215,7 @@ form.addEventListener("submit", function (event) {
   const keys = Object.keys(inputsValidity);
   const failedInputs = keys.filter((key) => !inputsValidity[key]);
 
+  // Create an animation on the button "Let's Go" if there is a problem
   if (failedInputs.length && !isAnimating) {
     isAnimating = true;
     btnSubmit.classList.add("shake");
@@ -242,6 +225,7 @@ form.addEventListener("submit", function (event) {
       isAnimating = false;
     }, 400);
 
+    // Check on which input there is a problem
     failedInputs.forEach((failedInput) => {
       const index = keys.indexOf(failedInput);
       validationInput({ index: index, validation: false });

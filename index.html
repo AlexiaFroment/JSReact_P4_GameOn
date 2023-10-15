@@ -132,63 +132,6 @@
                 Portland</label>
             </div>
 
-
-            <!-- HTML ABDEL -->
-            <!-- <div class="formData">
-              <input class="checkbox-input" type="checkbox" id="checkbox1" />
-              <label class="checkbox2-label" for="checkbox1" required>
-                <span class="checkbox-icon"></span>
-                J'ai lu et accepté les conditions d'utilisation.
-              </label>
-              <br>
-              <span id="errors_cgu" class="error"></span>
-              <input class="checkbox-input" type="checkbox" id="checkbox2" />
-              <label class="checkbox2-label" for="checkbox2">
-                <span class="checkbox-icon"></span>
-                Je souhaite être prévenu des prochains évènements.
-              </label>
-              <br>
-            </div> -->
-            <!-- JS -->
-            <!-- //Function qui affiche les erreurs
-            function showErrors(raison, error_name, input_id){
-            document.getElementById(`${error_name}`).innerHTML = `${raison}`;
-            if (input_id != undefined) {
-            document.getElementById(`${input_id}`).classList.add('border-error');
-            }
-            }
-
-            //function qui cache les erreurs
-            function hideErrors(error_name, input_id){
-            document.getElementById(`${error_name}`).innerHTML = '';
-            if (input_id != undefined) {
-            document.getElementById(`${input_id}`).classList.remove('border-error');
-            }
-            }
-            //Vérifie si les CGU sont cochées
-            function validate_cgu(){
-            if(cgu.checked){
-            hideErrors('errors_cgu');
-            return true;
-            // Si non, affiche un message d'erreur
-            } else {
-            // alert("Veuillez accepter les CGU");
-            showErrors('Vous devez vérifier que vous acceptez les termes et conditions.', 'errors_cgu');
-            return false;
-            }
-            } -->
-            <!-- CSS -->
-            <!-- .error {
-            color: red;
-            font-size: 12px;
-            }
-
-            .border-error {
-            border: 2px solid red;
-            } -->
-            <!-- HTML ABDEL -->
-
-
             <div class="formData"
               data-error="Tu dois accepter les conditions d'utilisation pour valider ton inscription">
               <input class="checkbox-input text-control" type="checkbox" id="checkbox1" checked />
@@ -212,7 +155,6 @@
         </div>
       </div>
     </div>
-
     <!-- End modal => Registration form -->
 
   </main>
